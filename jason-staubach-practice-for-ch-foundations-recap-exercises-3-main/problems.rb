@@ -15,9 +15,6 @@ def char_indices(str)
     hash
 end
 
-print char_indices('mississippi')   # => {"m"=>[0], "i"=>[1, 4, 7, 10], "s"=>[2, 3, 5, 6], "p"=>[8, 9]}
-print char_indices('classroom')     # => {"c"=>[0], "l"=>[1], "a"=>[2], "s"=>[3, 4], "r"=>[5], "o"=>[6, 7], "m"=>[8]}
-
 def longest_streak(str)
     curStreak = 1
     longStreak = 1
@@ -38,9 +35,21 @@ def longest_streak(str)
     longChar * longStreak
 end
 
-puts
-puts longest_streak('a')           # => 'a'
-puts longest_streak('accccbbb')    # => 'cccc'
-puts longest_streak('aaaxyyyyyzz') # => 'yyyyy
-puts longest_streak('aaabbb')      # => 'bbb'
-puts longest_streak('abc')         # => 'c'
+def bi_prime?(num)
+    (2...num).each do |i|
+        if num % i == 0
+            j = num / i     # now check if i and j are prime
+            bi1prime = (2...i).none?{|prime| i % prime == 0}
+            bi2prime = (2...j).none?{|prime| j % prime == 0}
+            return true if bi1prime && bi2prime
+        end
+    end
+    false
+end
+
+puts bi_prime?(14)   # => true
+puts bi_prime?(22)   # => true
+puts bi_prime?(25)   # => true
+puts bi_prime?(94)   # => true
+puts bi_prime?(24)   # => false
+puts bi_prime?(64)   # => false
