@@ -1,3 +1,5 @@
+require "byebug"
+
 class String
     def select(&prc)
         prc ||= Proc.new{false} 
@@ -8,8 +10,14 @@ class String
         end
         finStr
     end
-end
 
-puts "app academy".select { |ch| !"aeiou".include?(ch) }   # => "pp cdmy"
-puts "HELLOworld".select { |ch| ch == ch.upcase }          # => "HELLO"
-puts "HELLOworld".select          # => ""
+    def map!(&prc)
+        finWord = ""
+        self.each_char.with_index do |char, i|
+            if prc.call(char, i) != char
+                self[i] = prc.call(char,i)
+            end
+        end
+        self
+    end
+end
