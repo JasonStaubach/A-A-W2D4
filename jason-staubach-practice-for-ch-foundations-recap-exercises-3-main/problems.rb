@@ -47,9 +47,21 @@ def bi_prime?(num)
     false
 end
 
-puts bi_prime?(14)   # => true
-puts bi_prime?(22)   # => true
-puts bi_prime?(25)   # => true
-puts bi_prime?(94)   # => true
-puts bi_prime?(24)   # => false
-puts bi_prime?(64)   # => false
+def vigenere_cipher(word, keys)
+    alpha = ("a".."z").to_a
+    finWord = ""
+    keyArr = keys
+
+    word.each_char do |char|
+        finLet = (alpha.index(char) + keyArr[0]) % 26
+        finWord += alpha[finLet]
+        keyArr.rotate!
+    end
+    finWord
+end
+
+puts vigenere_cipher("toerrishuman", [1])        # => "upfssjtivnbo"
+puts vigenere_cipher("toerrishuman", [1, 2])     # => "uqftsktjvobp"
+puts vigenere_cipher("toerrishuman", [1, 2, 3])  # => "uqhstltjxncq"
+puts vigenere_cipher("zebra", [3, 0])            # => "ceerd"
+puts vigenere_cipher("yawn", [5, 1])             # => "dbbo"
