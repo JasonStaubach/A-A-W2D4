@@ -1,6 +1,6 @@
 class String
     def select(&prc)
-        prc ||= false
+        prc ||= Proc.new{false} 
 
         finStr = ""
         self.each_char do |char|
@@ -10,6 +10,6 @@ class String
     end
 end
 
-"app academy".select { |ch| !"aeiou".include?(ch) }   # => "pp cdmy"
-"HELLOworld".select { |ch| ch == ch.upcase }          # => "HELLO"
-"HELLOworld".select          # => ""
+puts "app academy".select { |ch| !"aeiou".include?(ch) }   # => "pp cdmy"
+puts "HELLOworld".select { |ch| ch == ch.upcase }          # => "HELLO"
+puts "HELLOworld".select          # => ""
