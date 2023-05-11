@@ -60,8 +60,24 @@ def vigenere_cipher(word, keys)
     finWord
 end
 
-puts vigenere_cipher("toerrishuman", [1])        # => "upfssjtivnbo"
-puts vigenere_cipher("toerrishuman", [1, 2])     # => "uqftsktjvobp"
-puts vigenere_cipher("toerrishuman", [1, 2, 3])  # => "uqhstltjxncq"
-puts vigenere_cipher("zebra", [3, 0])            # => "ceerd"
-puts vigenere_cipher("yawn", [5, 1])             # => "dbbo"
+def vowel_rotate(str)
+    vowels = "aeiou"
+    vowelArr = []
+    vowelIdx = []
+    str.each_char.with_index do |char, i|
+        if vowels.include?(char)
+            vowelArr << char
+            vowelIdx << i
+        end
+    end
+    vowelArr.rotate!(-1)
+    (0...vowelArr.length).each {|i| str[vowelIdx[i]] = vowelArr[i]}
+    str
+end
+
+# Examples
+puts vowel_rotate('computer')      # => "cempotur"
+puts vowel_rotate('oranges')       # => "erongas"
+puts vowel_rotate('headphones')    # => "heedphanos"
+puts vowel_rotate('bootcamp')      # => "baotcomp"
+puts vowel_rotate('awesome')       # => "ewasemo"
