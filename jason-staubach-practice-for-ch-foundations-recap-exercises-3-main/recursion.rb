@@ -9,7 +9,7 @@ def multiply(num1, num2)
 end
 
 def lucas_sequence(n)
-    if n == 0
+    if n <= 0
         return []
     elsif n == 1
         return [2]
@@ -20,14 +20,29 @@ def lucas_sequence(n)
     end
 end
 
-print lucas_sequence(0)   # => []
+def prime_factorization(num)
+    smallest_factor = num
+    prime = (2...num).none? {|i| smallest_factor = i if num % i == 0}
+    
+    if prime
+        return [num]
+    else
+        return [smallest_factor] + prime_factorization(num / smallest_factor)
+    end
+end
+
+print prime_factorization(12)     # => [2, 2, 3]
 puts
-print lucas_sequence(1)   # => [2]    
+print prime_factorization(24)     # => [2, 2, 2, 3]
 puts
-print lucas_sequence(2)   # => [2, 1]
+print prime_factorization(25)     # => [5, 5]
 puts
-print lucas_sequence(3)   # => [2, 1, 3]
+print prime_factorization(60)     # => [2, 2, 3, 5]
 puts
-print lucas_sequence(6)   # => [2, 1, 3, 4, 7, 11]
+print prime_factorization(7)      # => [7]
 puts
-print lucas_sequence(8)   # => [2, 1, 3, 4, 7, 11, 18, 29]
+print prime_factorization(11)     # => [11]
+puts
+print prime_factorization(2017)   # => [2017]
+
+
